@@ -4,6 +4,13 @@ import { navigate } from "gatsby";
 import "../assets/style.css";
 import Button from '@material-ui/core/Button';
 
+import Amplify from 'aws-amplify';
+Amplify.configure({
+  aws_appsync_region: "us-east-1",
+  aws_appsync_graphqlEndpoint: "https://d47rtyzdhjexnjjhf2od77irle.appsync-api.us-east-1.amazonaws.com/graphql", // AWS AppSync endpoint
+  aws_appsync_authenticationType: "API_KEY",
+  aws_appsync_apiKey: "da2-apb5dy4pn5fpvccjvz4y3cjhzq" 
+});
 
 const Home = () => {
 
