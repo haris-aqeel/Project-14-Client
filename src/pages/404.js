@@ -16,26 +16,40 @@ const query  = `
     }
 `
 
-export default async function NotFound(datas) {
+export default function NotFound(x) {
+   
+  const [data, setdata] = React.useState(undefined);
 
-  console.log(datas)
-//   var queryLollies = path.location.pathname.slice(0, 7)
-//   var queryPath = path.location.pathname.slice(7)
-//     console.log("querylolly"+ queryLollies,"querypath" + queryPath)
- 
+  var queryPath = x?.location.pathname.slice(7)
+  
+  React.useEffect(()=> {
+    
+    const response = API.graphql({
+      query: query,
+      variables: {path: queryPath}
+    })
 
-  const data = await API.graphql({ query })
+    response.then((res)=> {
+      setdata(res.data)
+      console.log(data)
+
+    }).catch((err)=> {
+      console.log(err)
+    })
+
+    console.log(data)
+
+  }, [queryPath])
   
   return (
     <div>
-      {/* {loading ? (
-        <div className="loading">Loading...</div>
-      ) : !!data && queryLollies === "/lolly/" ? (
+        {data !== undefined ? 
+
         <div>
-          <h5 className="sharableLinkContainer">Your sharable link: </h5>{" "}
+          <h5 className="sharableLinkContainer">Your sharable link: </h5>
           <span className="sharableLink">
-            {" "}
-            {`https://pedantic-williams-05140f.netlify.app/lolly/${data.getLollyBySlug.path}`}
+            
+            {/* {`https://localhost:8000/lolly/${data.getLollyBySlug.path}`} */}
           </span>
           <div className="recievedContentContainer">
             <Lolly
@@ -50,12 +64,8 @@ export default async function NotFound(datas) {
               <h4>From: {data.getLollyBySlug.senderName}</h4>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="pageNotFound">We are deeply Sorry that the page is not found</div>
-      )} */}
-
-      loading.....
-    </div>
+        </div>: <h1>Loading....</h1>}
+      </div>
   )
+  
 }
