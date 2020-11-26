@@ -9,7 +9,7 @@ import shortId from "shortid"
 import { navigate } from "gatsby"
 import ErrorMsg from "../Utils/ErrorMsg"
 import { API } from "aws-amplify"
-
+import {useHistory} from 'react-router-dom'
 
 
 const CREATElOLLY = `
@@ -43,6 +43,9 @@ const validationSchema = Yup.object({
 })
 
 const CreateLolly = () => {
+
+  const history = useHistory();
+
   const [fillLollyTop, setfillLollyTop] = React.useState("#d52358")
   const [fillLollyMiddle, setfillLollyMiddle] = React.useState("#e95946")
   const [fillLollyBottom, setfillLollyBottom] = React.useState("#deaa43")
@@ -68,6 +71,8 @@ const CreateLolly = () => {
 
 
   const onSubmit = async (values, actions) => {
+    
+
     const slug = shortId.generate()
     createLolly(values.message, slug, values.to, values.from);
 
@@ -80,7 +85,10 @@ const CreateLolly = () => {
       },
     })
 
-    await navigate(`/lolly/${slug}`)
+   
+  await navigate(`/404`, {
+    state: {path: slug}
+  })
   }
 
   return (

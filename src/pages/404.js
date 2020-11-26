@@ -20,7 +20,8 @@ export default function NotFound(x) {
    
   const [data, setdata] = React.useState(undefined);
 
-  var queryPath = x?.location.pathname.slice(7)
+  var queryPath = x?.location.state.path
+
   
   React.useEffect(()=> {
     
@@ -49,7 +50,7 @@ export default function NotFound(x) {
           <h5 className="sharableLinkContainer">Your sharable link: </h5>
           <span className="sharableLink">
             
-            {/* {`https://localhost:8000/lolly/${data.getLollyBySlug.path}`} */}
+             {`http://localhost:8000/lolly/${data.getLollyBySlug.path}`} 
           </span>
           <div className="recievedContentContainer">
             <Lolly
