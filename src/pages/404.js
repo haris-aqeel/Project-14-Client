@@ -43,7 +43,7 @@ export default function NotFound(x) {
   }, [queryPath])
   
   return (
-    <div>
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
         {data !== undefined ? 
 
         <div>
